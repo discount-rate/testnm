@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--        指定数据库连接池对象-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--    开启事务注解支持-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--    <aop:config>-->
+    <!--        &lt;!&ndash;        切入点  service &ndash;&gt;-->
+    <!--        <aop:pointcut id="pointcut" expression="execution(public * com.smart.tx.service.impl.*(..))"/>-->
+    <!--        <aop:advisor pointcut-ref="pointcut" advice-ref="advice"/>-->
+    <!--    </aop:config>-->
+
+    <!--    <tx:advice id="advice">-->
+    <!--        <tx:attributes>-->
+    <!--            <tx:method name="save*" propagation="REQUIRED"/>-->
+    <!--            <tx:method name="add*" propagation="REQUIRED"/>-->
+    <!--        </tx:attributes>-->
+    <!--    </tx:advice>-->
+
+</beans>

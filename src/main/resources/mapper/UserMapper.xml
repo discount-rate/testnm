@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.tx.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="User">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
+    <insert id="insert" keyProperty="user.uid" useGeneratedKeys="true">
+        INSERT INTO tb_user(username, password)
+        VALUES (#{user.username}, #{user.password})
+    </insert>
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_user
+    </select>
+    <update id="update">
+        UPDATE tb_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user.username!= null">
+                username=#{user.username},
+            </if>
+            <if test="user.password != null">
+                password = #{user.password},
+            </if>
+        </trim>
+        where uid= #{user.uid}
+
+    </update>
+</mapper>
